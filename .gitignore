@@ -44,4 +44,5 @@ packages/
 .paket/paket.bootstrapper.exe
 
 #config
-BotExperiment/config.json
+config*
+
