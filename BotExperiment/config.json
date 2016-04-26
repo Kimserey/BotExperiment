@@ -1,0 +1,6 @@
+﻿
+
+namespace BotExperiment
+open System
+
+type config() = 
