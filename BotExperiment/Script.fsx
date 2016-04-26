@@ -5,7 +5,15 @@ open FSharp.Data
 type Config = JsonProvider<"../../configs/botconfig.json">
 
 let config = Config.GetSample()
+let witRoot = "https://api.wit.ai/"
 
+// Test message
 Http.Request(
-    "https://api.wit.ai/message?q=Hey%20Ho", 
-    headers = [ ("Authorization", "Bearer " + config.ApiServerKey) ])
+    witRoot + "message",
+    query = [ ("q", "Hey ho") ],
+    headers = [ ("Authorization", "Bearer " + config.ApiServerKey) ]).Body
+
+// Get all entities
+Http.Request(
+    witRoot + "entities",
+    headers = [ ("Authorization", "Bearer " + config.ApiServerKey) ]).Body
