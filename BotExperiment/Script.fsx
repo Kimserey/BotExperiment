@@ -13,8 +13,9 @@ let headers =
 
 [<AutoOpen>]
 module Wit =
-    let message str = ("q", str)
-    let sessionId id = ("session_id", id)
+    let message str     = ("q", str)
+    let sessionId id    = ("session_id", id)
+    let quantity (n: int)      = ("n", string n)
 
 // Test message
 Http.Request(
@@ -27,7 +28,8 @@ Http.Request(
     witRoot + "entities",
     headers = headers).Body
 
-(** Post request - converse
+(** 
+    Post request - converse
 **)
 let sid = "123ab"
 
@@ -48,3 +50,12 @@ Http.Request(
     query = [ sessionId sid ],
     headers = headers @ [ ContentType HttpContentTypes.Json ],
     body = TextRequest """ { "items": "hello" } """)
+
+(**
+    Get outcomes based on text - message
+**)
+
+Http.Request(
+    witRoot + "message",
+    query = [ message "Add something"; quantity 3 ],
+    headers = headers)
